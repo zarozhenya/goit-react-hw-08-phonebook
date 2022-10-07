@@ -6,12 +6,21 @@ import { Wrapper, Title, Container, Heading } from './App.styled';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
+import { read, create } from 'utils/crud';
+
+const KEY = 'contacts';
 
 export class App extends Component {
   state = {
     contacts: [],
     filter: '',
   };
+
+  componentDidMount() {
+    const savedContacts = read(KEY);
+    this.setState({ contacts: savedContacts });
+  }
+
   getFilteredContacts = () => {
     const { contacts, filter } = this.state;
     const filteredContacts = contacts.filter(contact =>
@@ -32,11 +41,15 @@ export class App extends Component {
     this.setState(prevState => ({
       contacts: [contact, ...prevState.contacts],
     }));
+
+    create(KEY, [contact, ...this.state.contacts]);
   };
   deleteContact = idToDelete => {
     const { contacts } = this.state;
     const updatedContacts = contacts.filter(({ id }) => id !== idToDelete);
     this.setState({ contacts: updatedContacts });
+
+    create(KEY, updatedContacts);
   };
 
   updateFilter = e => {

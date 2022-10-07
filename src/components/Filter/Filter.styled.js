@@ -4,11 +4,9 @@ export const StyledField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 16px;
   padding: 15px 30px;
   background-color: #dbe2ef;
   border-radius: 10px;
-  margin-bottom: 20px;
 `;
 
 export const StyledLabel = styled.label`
