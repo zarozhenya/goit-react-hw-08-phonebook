@@ -1,15 +1,18 @@
 import PropTypes from 'prop-types';
+import { AiFillDelete } from 'react-icons/ai';
 
-import { List, Button } from './ContactList.styled';
+import { List, Button, Item } from './ContactList.styled';
 
 export const ContactList = ({ contacts, handleDelete }) => {
   return (
     <List>
       {contacts.map(contact => (
-        <li key={contact.id}>
+        <Item key={contact.id}>
           {contact.name}: {contact.number}
-          <Button onClick={() => handleDelete(contact.id)}>Delete</Button>
-        </li>
+          <Button onClick={() => handleDelete(contact.id)}>
+            <AiFillDelete size="20" fill="currentColor" />
+          </Button>
+        </Item>
       ))}
     </List>
   );

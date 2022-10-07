@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
-import { Formik, Field } from 'formik';
+import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import {
   StyledForm,
   StyledField,
   StyledError,
+  StyledLabel,
+  StyledInput,
   Button,
 } from './ContactForm.styled';
 export const ContactForm = ({ addContact }) => {
@@ -41,13 +43,13 @@ export const ContactForm = ({ addContact }) => {
     >
       <StyledForm autoComplete="off">
         <StyledField>
-          <label htmlFor="nameInput">Name</label>
-          <Field id="nameInput" type="text" name="name" />
+          <StyledLabel htmlFor="nameInput">Name</StyledLabel>
+          <StyledInput id="nameInput" type="text" name="name" />
           <StyledError name="name" component="p" />
         </StyledField>
         <StyledField>
-          <label htmlFor="telInput">Number</label>
-          <Field type="tel" name="number" />
+          <StyledLabel htmlFor="telInput">Number</StyledLabel>
+          <StyledInput type="tel" name="number" />
           <StyledError name="number" component="p" />
         </StyledField>
 

@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 import { Component } from 'react';
 import { Notify } from 'notiflix';
 
+import { Wrapper, Title, Container, Heading } from './App.styled';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
@@ -44,20 +45,24 @@ export class App extends Component {
   };
 
   render() {
-    const { filter } = this.state;
+    const { filter, contacts } = this.state;
     const filteredContacts = this.getFilteredContacts();
     return (
-      <>
-        <h1>Phonebook</h1>
-        <ContactForm addContact={this.addContact} />
+      <Wrapper>
+        <Container>
+          <Title>Phonebook</Title>
+          <ContactForm addContact={this.addContact} />
 
-        <h2>Contacts</h2>
-        <Filter value={filter} onChange={this.updateFilter} />
-        <ContactList
-          contacts={filteredContacts}
-          handleDelete={this.deleteContact}
-        />
-      </>
+          <Heading>Contacts</Heading>
+          <Filter value={filter} onChange={this.updateFilter} />
+          {contacts.length > 0 && (
+            <ContactList
+              contacts={filteredContacts}
+              handleDelete={this.deleteContact}
+            />
+          )}
+        </Container>
+      </Wrapper>
     );
   }
 }
