@@ -3,9 +3,9 @@ import { Component } from 'react';
 import { Notify } from 'notiflix';
 
 import { Wrapper, Title, Container, Heading } from './App.styled';
-import { ContactForm } from './ContactForm/ContactForm';
-import { Filter } from './Filter/Filter';
-import { ContactList } from './ContactList/ContactList';
+import { ContactForm } from 'components/ContactForm';
+import { Filter } from 'components/Filter';
+import { ContactList } from 'components/ContactList';
 import { read, create } from 'utils/crud';
 
 const KEY = 'contacts';
