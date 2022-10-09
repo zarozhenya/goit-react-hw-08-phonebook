@@ -21,6 +21,10 @@ export class App extends Component {
     this.setState({ contacts: savedContacts });
   }
 
+  componentDidUpdate() {
+    create(KEY, this.state.contacts);
+  }
+
   getFilteredContacts = () => {
     const { contacts, filter } = this.state;
     const filteredContacts = contacts.filter(contact =>
@@ -41,15 +45,11 @@ export class App extends Component {
     this.setState(prevState => ({
       contacts: [contact, ...prevState.contacts],
     }));
-
-    create(KEY, [contact, ...this.state.contacts]);
   };
   deleteContact = idToDelete => {
     const { contacts } = this.state;
     const updatedContacts = contacts.filter(({ id }) => id !== idToDelete);
     this.setState({ contacts: updatedContacts });
-
-    create(KEY, updatedContacts);
   };
 
   updateFilter = e => {
