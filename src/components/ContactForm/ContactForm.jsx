@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { Notify } from 'notiflix';
 
 import {
   StyledForm,
@@ -10,11 +10,17 @@ import {
   StyledInput,
   Button,
 } from './ContactForm.styled';
-export const ContactForm = ({ addContact }) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/actions';
+
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts);
   const initialValues = {
     name: '',
     number: '',
   };
+
   const validationSchema = yup.object().shape({
     name: yup
       .string()
@@ -31,9 +37,19 @@ export const ContactForm = ({ addContact }) => {
       )
       .required('Please enter a number'),
   });
+
   const handleSubmit = (values, actions) => {
     actions.resetForm();
-    addContact({ name: values.name, number: values.number });
+
+    const isContactInContacts = contacts.some(
+      ({ name }) => name === values.name
+    );
+    if (isContactInContacts) {
+      Notify.failure(`Contact "${values.name}" is already in your Contacts`);
+      return;
+    }
+
+    dispatch(addContact({ name: values.name, number: values.number }));
   };
   return (
     <Formik
@@ -57,8 +73,4 @@ export const ContactForm = ({ addContact }) => {
       </StyledForm>
     </Formik>
   );
-};
-
-ContactForm.propTypes = {
-  addContact: PropTypes.func.isRequired,
 };
