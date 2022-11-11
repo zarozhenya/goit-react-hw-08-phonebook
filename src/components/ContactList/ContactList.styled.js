@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  padding: 30px;
+  background-color: #dbe2ef;
+  border-radius: 10px;
+  margin-top: 20px;
+`;
+
 export const List = styled.ul`
   margin: 0;
-  margin-top: 20px;
   padding: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 15px;
-
-  padding: 30px;
-  background-color: #dbe2ef;
-  border-radius: 10px;
-  margin-bottom: 20px;
 `;
 
 export const Item = styled.li`
@@ -39,4 +40,12 @@ export const Button = styled.button`
   }
   color: #f9f7f7;
   background-color: #e84545;
+`;
+
+export const Message = styled.p`
+  text-align: center;
+  margin: 0;
+  color: ${props => (props.color ? props.color : '#112d4e')};
+  font-weight: 500;
+  font-size: 18px;
 `;
