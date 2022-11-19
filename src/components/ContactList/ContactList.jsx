@@ -5,9 +5,9 @@ import {
   selectIsLoading,
   selectError,
   selectFilteredContacts,
-} from 'redux/selectors';
+} from 'redux/contacts/selectors';
 
-import { deleteContact } from 'redux/operations';
+import { deleteContact } from 'redux/contacts/operations';
 
 import { List, Button, Item, Container, Message } from './ContactList.styled';
 
